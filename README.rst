@@ -13,15 +13,13 @@ Introduction
     :target: https://travis-ci.org/adafruit/Adafruit_CircuitPython_pixie
     :alt: Build Status
 
-.. todo:: Describe what the library does.
+.. A driver for Pixie - 3W Chainable Smart LED Pixel
 
 Dependencies
 =============
 This driver depends on:
 
 * `Adafruit CircuitPython <https://github.com/adafruit/circuitpython>`_
-* `Bus Device <https://github.com/adafruit/Adafruit_CircuitPython_BusDevice>`_
-* `Register <https://github.com/adafruit/Adafruit_CircuitPython_Register>`_
 
 Please ensure all dependencies are available on the CircuitPython filesystem.
 This is easily achieved by downloading
@@ -30,7 +28,38 @@ This is easily achieved by downloading
 Usage Example
 =============
 
-.. todo:: Add a quick, simple example. It and other examples should live in the examples folder and be included in docs/examples.rst.
+.. code-block:: python
+
+    import time
+    import board
+    import adafruit_pixie
+    import busio
+
+    uart = busio.UART(board.TX, rx=None, baudrate=115200)
+
+    num_pixies = 2  # Change this to the number of Pixies LEDs you have.
+    pixies = adafruit_pixie.Pixie(uart, num_pixies, brightness=0.2, auto_write=False)
+
+
+    def wheel(pos):
+    # Input a value 0 to 255 to get a color value.
+    # The colours are a transition r - g - b - back to r.
+    if pos < 0 or pos > 255:
+        return 0, 0, 0
+    if pos < 85:
+        return int(255 - pos * 3), int(pos * 3), 0
+    if pos < 170:
+        pos -= 85
+        return 0, int(255 - pos * 3), int(pos * 3)
+    pos -= 170
+    return int(pos * 3), 0, int(255 - (pos * 3))
+
+
+    while True:
+    for i in range(255):
+        for pixie in range(num_pixies):
+            pixies[pixie] = wheel(i)
+        pixies.show()
 
 Contributing
 ============
