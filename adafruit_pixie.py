@@ -46,7 +46,7 @@ class Pixie:
 
     Example for two Pixie LEDs chained:
 
-    .. code_block:: python
+    .. code_block::python
 
         import time
         import board
