@@ -28,7 +28,7 @@ This is easily achieved by downloading
 Usage Example
 =============
 
-.. code-block:: python
+.. code-block::python
 
     import time
     import board
