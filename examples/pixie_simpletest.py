@@ -5,7 +5,7 @@ import busio
 
 uart = busio.UART(board.TX, rx=None, baudrate=115200)
 
-num_pixies = 2  # Change this to the number of Pixies LEDs you have.
+num_pixies = 2  # Change this to the number of Pixie LEDs you have.
 pixies = adafruit_pixie.Pixie(uart, num_pixies, brightness=0.2, auto_write=False)
 
 
