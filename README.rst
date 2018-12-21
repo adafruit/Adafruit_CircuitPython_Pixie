@@ -9,8 +9,8 @@ Introduction
     :target: https://discord.gg/nBQh6qu
     :alt: Discord
 
-.. image:: https://travis-ci.org/adafruit/Adafruit_CircuitPython_Pixie.svg?branch=master
-    :target: https://travis-ci.org/adafruit/Adafruit_CircuitPython_Pixie
+.. image:: https://travis-ci.com/adafruit/Adafruit_CircuitPython_Pixie.svg?branch=master
+    :target: https://travis-ci.com/adafruit/Adafruit_CircuitPython_Pixie
     :alt: Build Status
 
 .. A driver for Pixie - 3W Chainable Smart LED Pixel
