@@ -1,7 +1,7 @@
 import time
 import board
-import adafruit_pixie
 import busio
+import adafruit_pixie
 
 uart = busio.UART(board.TX, rx=None, baudrate=115200)
 
