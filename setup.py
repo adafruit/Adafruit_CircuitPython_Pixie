@@ -34,7 +34,7 @@ setup(
     author='Adafruit Industries',
     author_email='circuitpython@adafruit.com',
 
-    install_requires=[],
+    install_requires=['Adafruit-Blinka'],
 
     # Choose your license
     license='MIT',
