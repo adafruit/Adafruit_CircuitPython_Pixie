@@ -3,7 +3,12 @@ import board
 import busio
 import adafruit_pixie
 
+# For use with CircuitPython:
 uart = busio.UART(board.TX, rx=None, baudrate=115200)
+
+# For use on Raspberry Pi/Linux with Adafruit_Blinka:
+# import serial
+# uart = serial.Serial("/dev/ttyS0", baudrate=115200, timeout=3000)
 
 num_pixies = 2  # Change this to the number of Pixie LEDs you have.
 pixies = adafruit_pixie.Pixie(uart, num_pixies, brightness=0.2, auto_write=False)
