@@ -1,9 +1,9 @@
 import time
+import board
+import busio
 import adafruit_pixie
 
 # For use with CircuitPython:
-import board
-import busio
 uart = busio.UART(board.TX, rx=None, baudrate=115200)
 
 # For use on Raspberry Pi/Linux with Adafruit_Blinka:
