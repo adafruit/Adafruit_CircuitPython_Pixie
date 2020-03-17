@@ -63,6 +63,7 @@ class Pixie:
             pixies[1] = (0, 0, 255)
             time.sleep(1)
     """
+
     def __init__(self, uart, n, *, brightness=1.0, auto_write=True):
         self._uart = uart
         self._n = n
@@ -84,8 +85,8 @@ class Pixie:
         b = 0
         if isinstance(value, int):
             r = value >> 16
-            g = (value >> 8) & 0xff
-            b = value & 0xff
+            g = (value >> 8) & 0xFF
+            b = value & 0xFF
         elif len(value) == 3:
             r, g, b = value
         self._buf[offset + 0] = r
