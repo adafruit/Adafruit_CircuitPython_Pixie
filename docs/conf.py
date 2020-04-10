@@ -46,7 +46,7 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # General information about the project.
-project = "Adafruit pixie Library"
+project = "Adafruit Pixie Library"
 copyright = "2018 Limor Fried"
 author = "Limor Fried"
 
@@ -147,8 +147,8 @@ latex_elements = {
 latex_documents = [
     (
         master_doc,
-        "AdafruitpixieLibrary.tex",
-        "Adafruitpixie Library Documentation",
+        "AdafruitPixieLibrary.tex",
+        "Adafruit Pixie Library Documentation",
         author,
         "manual",
     ),
@@ -161,8 +161,8 @@ latex_documents = [
 man_pages = [
     (
         master_doc,
-        "Adafruitpixielibrary",
-        "Adafruit pixie Library Documentation",
+        "AdafruitPixielibrary",
+        "Adafruit Pixie Library Documentation",
         [author],
         1,
     )
@@ -176,10 +176,10 @@ man_pages = [
 texinfo_documents = [
     (
         master_doc,
-        "AdafruitpixieLibrary",
-        "Adafruit pixie Library Documentation",
+        "AdafruitPixieLibrary",
+        "Adafruit Pixie Library Documentation",
         author,
-        "AdafruitpixieLibrary",
+        "AdafruitPixieLibrary",
         "One line description of project.",
         "Miscellaneous",
     ),
