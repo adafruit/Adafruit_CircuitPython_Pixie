@@ -52,10 +52,11 @@ To install in a virtual environment in your current project:
 Usage Example
 =============
 
-.. code-block::python
+.. code-block:: python
 
     import time
     import board
+    from rainbowio import colorwheel
     import adafruit_pixie
     import busio
 
@@ -65,24 +66,10 @@ Usage Example
     pixies = adafruit_pixie.Pixie(uart, num_pixies, brightness=0.2, auto_write=False)
 
 
-    def wheel(pos):
-    # Input a value 0 to 255 to get a color value.
-    # The colours are a transition r - g - b - back to r.
-    if pos < 0 or pos > 255:
-        return 0, 0, 0
-    if pos < 85:
-        return int(255 - pos * 3), int(pos * 3), 0
-    if pos < 170:
-        pos -= 85
-        return 0, int(255 - pos * 3), int(pos * 3)
-    pos -= 170
-    return int(pos * 3), 0, int(255 - (pos * 3))
-
-
     while True:
     for i in range(255):
         for pixie in range(num_pixies):
-            pixies[pixie] = wheel(i)
+            pixies[pixie] = colorwheel(i)
         pixies.show()
 
 Contributing
