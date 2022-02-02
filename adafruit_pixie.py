@@ -12,6 +12,12 @@
 import time
 import math
 
+try:
+    from typing import Union, Tuple
+    from busio import UART
+except ImportError:
+    pass
+
 __version__ = "0.0.0-auto.0"
 __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_Pixie.git"
 
@@ -20,7 +26,7 @@ class Pixie:
     """
     PIxie LEDs.
 
-    :param uart: The UART object.
+    :param busio.UART uart: The UART object.
     :param int n: The number of Pixies in the chain.
     :param float brightness: Brightness of the pixels between 0.0 and 1.0.
     :param bool auto_write: True if the Pixies should immediately change when
@@ -38,6 +44,10 @@ class Pixie:
         uart = busio.UART(board.TX, rx=None, baudrate=115200)
         pixies = adafruit_pixie.Pixie(uart, 2, brightness=0.5)
 
+        # Colors can be either tuples or integer representing RGB values
+        # red = (255, 0, 0)
+        # green = 0x00FF00
+
         while True:
             pixies.fill((255, 0, 0))
             time.sleep(1)
@@ -46,7 +56,9 @@ class Pixie:
             time.sleep(1)
     """
 
-    def __init__(self, uart, n, *, brightness=1.0, auto_write=True):
+    def __init__(
+        self, uart: UART, n: int, *, brightness: float = 1.0, auto_write: bool = True
+    ) -> None:
         self._uart = uart
         self._n = n
         self._buf = bytearray(self._n * 3)
@@ -56,7 +68,7 @@ class Pixie:
         self._brightness = brightness
         self.auto_write = auto_write
 
-    def _set_item(self, index, value):
+    def _set_item(self, index: int, value: Union[int, Tuple[int, int, int]]) -> None:
         if index < 0:
             index += len(self)
         if index >= self._n or index < 0:
@@ -75,7 +87,9 @@ class Pixie:
         self._buf[offset + 1] = g
         self._buf[offset + 2] = b
 
-    def __setitem__(self, index, val):
+    def __setitem__(
+        self, index: Union[int, slice], val: Union[int, Tuple[int, int, int]]
+    ) -> None:
         if isinstance(index, slice):
             start, stop, step = index.indices(len(self._buf) // 3)
             length = stop - start
@@ -95,18 +109,23 @@ class Pixie:
         return len(self._buf) // 3
 
     @property
-    def brightness(self):
+    def brightness(self) -> float:
         """Overall brightness of the pixel"""
         return self._brightness
 
     @brightness.setter
-    def brightness(self, brightness):
+    def brightness(self, brightness: float) -> None:
         self._brightness = min(max(brightness, 0.0), 1.0)
         if self.auto_write:
             self.show()
 
-    def fill(self, color):
-        """Colors all pixels the given ***color***."""
+    def fill(self, color: Union[int, Tuple[int, int, int]]) -> None:
+        """Colors all pixels the given color.
+
+        :param color: Either a tuple or integer representing RGB values, such as
+            (255, 0, 0) or 0xFF0000
+        :type color: int|(int, int, int)
+        """
         auto_write = self.auto_write
         self.auto_write = False
         for i in range(self._n):
@@ -115,7 +134,7 @@ class Pixie:
             self.show()
         self.auto_write = auto_write
 
-    def show(self):
+    def show(self) -> None:
         """
         Shows the new colors on the pixels themselves if they haven't already
         been autowritten.
