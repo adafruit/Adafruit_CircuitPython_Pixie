@@ -12,7 +12,7 @@ requires = [
 [project]
 name = "adafruit-circuitpython-pixie"
 description = "CircuitPython library for Pixie chainable 3W smart LED."
-version = "0.0.0-auto.0"
+version = "0.0.0+auto.0"
 readme = "README.rst"
 authors = [
     {name = "Adafruit Industries", email = "circuitpython@adafruit.com"}
