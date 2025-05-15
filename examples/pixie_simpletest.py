@@ -2,9 +2,11 @@
 # SPDX-License-Identifier: MIT
 
 import time
+
 import board
 import busio
 from rainbowio import colorwheel
+
 import adafruit_pixie
 
 # For use with CircuitPython:
