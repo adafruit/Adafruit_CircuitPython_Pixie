@@ -9,11 +9,12 @@
 * Author(s): Damien P. George, Limor Fried, Kattni Rembor
 """
 
-import time
 import math
+import time
 
 try:
-    from typing import Union, Tuple
+    from typing import Tuple, Union
+
     from busio import UART
 except ImportError:
     pass
@@ -87,9 +88,7 @@ class Pixie:
         self._buf[offset + 1] = g
         self._buf[offset + 2] = b
 
-    def __setitem__(
-        self, index: Union[int, slice], val: Union[int, Tuple[int, int, int]]
-    ) -> None:
+    def __setitem__(self, index: Union[int, slice], val: Union[int, Tuple[int, int, int]]) -> None:
         if isinstance(index, slice):
             start, stop, step = index.indices(len(self._buf) // 3)
             length = stop - start
